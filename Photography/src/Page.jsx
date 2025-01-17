@@ -110,6 +110,7 @@ const Page = () => {
   const homeImages = [
     "./Images/HP8.png",
     "./Images/HP3.png",
+    "./Images/HP1.png",
     "./Images/HP4.png",
     "./Images/HP5.png",
     "./Images/HP6.png",
@@ -200,7 +201,6 @@ const Page = () => {
   return (
     <>
       <AnimatePresence>{loading && <PreLoader />}</AnimatePresence>
-
       <nav
         className={`${styles.nav} ${
           isDarkMode ? styles.darkTheme : styles.lightTheme
@@ -266,10 +266,10 @@ const Page = () => {
               key={currentIndex}
               className={styles.imageContainer}
               custom={direction}
-              exit="exit"
+              variants={variants}
               initial="enter"
               animate="center"
-              variants={variants}
+              exit="exit"
               style={{
                 backgroundImage: `url(${homeImages[currentIndex]})`,
               }}
