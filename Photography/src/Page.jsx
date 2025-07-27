@@ -11,14 +11,16 @@ import {
   Moon,
   MessageCircle,
   Loader2,
-  BookCheck
+  BookCheck,
+  X,
+  Code,
+  User
 } from "lucide-react";
-import { SiWhatsapp } from "react-icons/si";
-
+import { SiWhatsapp,SiInstagram } from "react-icons/si";
 import styles from "./Page.module.css";
+
 const ImagePreloader = ({ onLoadComplete }) => {
   const [loadingProgress, setLoadingProgress] = useState(0);
-  
   const allImages = [
     "./Images/m1.png",
     "./Images/m2.png",
@@ -36,19 +38,40 @@ const ImagePreloader = ({ onLoadComplete }) => {
     "./Images/HP7.png",
     "./Images/Logo.png",
     "./Images/Logo2.png",
-    // Service placeholder images
-    "./Images/family.jpg",
-    "./Images/maternity.jpg",
-    "./Images/engagement.jpg",
-    "./Images/marriage.jpg",
-    "./Images/prewedding.jpg",
-    "./Images/modeling.jpg",
-    // Portfolio images
-    "./Images/Port1.jpg",
-    "./Images/Port2.jpg",
+    "./Images/NH1.jpg",
+    "./Images/NH2.jpg",
+    "./Images/NH3.jpg",
+    "./Images/NH4.jpg",
+    "./Images/NH5.jpg",
+    "./Images/NH6.jpg",
+    "./Images/NH8.jpg",
+    "./Images/NH9.jpg",
+    "./Images/NH11.jpg",
+    "./Images/Newm3.png",
+    "./Images/MI1.jpg",
+    "./Images/MI2.jpg",
+    "./Images/MI3.jpg",
+    "./Images/MI4.jpg",
+    "./Images/MI5.jpg",
+    "./Images/MI6.jpg",
+    "./Images/MI7.jpg",
+    "./Images/MI8.jpg",
+    "./Images/MI9.jpg",
+    "./Images/SER1.jpg",
+    "./Images/SER2.jpg",
+    "./Images/SER3.jpg",
+    "./Images/SER4.jpg",
+    "./Images/SER6.jpg",
     "./Images/Port3.jpg",
+    "./Images/Port2.jpg",
+    "./Images/Port4.jpg",
+    "./Images/Port7.jpg",
+    "./Images/Port8.jpg",
+    "./Images/Port10.jpg",
+    "./Images/Port9.jpg"
   ];
- useEffect(() => {
+
+  useEffect(() => {
     let loadedCount = 0;
     const totalImages = allImages.length;
 
@@ -75,39 +98,39 @@ const ImagePreloader = ({ onLoadComplete }) => {
   }, [onLoadComplete]);
 
   return (
-     <motion.div
-        className={styles.imagePreloader}
-        initial={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className={styles.preloaderConten}>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            You Almost Reached the Best Photography Website
-          </motion.h2>
-          <motion.div
-            className={styles.loaderContainer}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-          >
-            <Loader2 className={styles.spinner} size={40} color="white" />
-            <div className={styles.progressBar}>
-              <motion.div
-                className={styles.progressFill}
-                initial={{ width: 0 }}
-                animate={{ width: `${loadingProgress}%` }}
-                transition={{ duration: 0.3 }}
-              />
-            </div>
-            <p>{Math.round(loadingProgress)}% loaded</p>
-          </motion.div>
-        </div>
-      </motion.div>
+    <motion.div
+      className={styles.imagePreloader}
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className={styles.preloaderContent}>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          You Almost Reached the Best Photography Website
+        </motion.h2>
+        <motion.div
+          className={styles.loaderContainer}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+        >
+          <Loader2 className={styles.spinner} size={40} />
+          <div className={styles.progressBar}>
+            <motion.div
+              className={styles.progressFill}
+              initial={{ width: 0 }}
+              animate={{ width: `${loadingProgress}%` }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+          <p>{Math.round(loadingProgress)}% loaded</p>
+        </motion.div>
+      </div>
+    </motion.div>
   );
 };
 
@@ -123,15 +146,16 @@ const PreLoader = () => {
 
   return (
     <motion.div
-      className="preloader"
+      className={styles.preloader}
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 1 }}
     >
-      <div className="imageGrid">
+      <div className={styles.imageGrid}>
         {images.map((img, index) => (
           <motion.div
             key={index}
+            className={styles.preloaderImageWrapper}
             initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
             animate={{
               opacity: [0, 1, 1, 0],
@@ -149,7 +173,7 @@ const PreLoader = () => {
         ))}
       </div>
       <motion.div
-        className="logo"
+        className={styles.logoContainer}
         initial={{
           scale: 0,
           rotate: -1,
@@ -163,41 +187,216 @@ const PreLoader = () => {
           filter: "blur(0px)",
         }}
         transition={{
-          delay: 2,
-          duration: 1,
-          stiffness: 200,
+          delay: 1.5,
+          duration: 2,
         }}
       >
-        <img src="./Images/Logo.png" alt="Logo" />
-        <p className="ownername">Vaibhav Photography</p>
-      </motion.div>
-      <motion.div
-        className="tags"
-        initial={{
-          scale: 0,
-          rotate: -1,
-          opacity: 0,
-          filter: "blur(50px)",
-        }}
-        animate={{
-          scale: 1,
-          rotate: 0,
-          opacity: 1,
-          filter: "blur(0px)",
-        }}
-        transition={{
-          delay: 2,
-          duration: 1,
-          stiffness: 200,
-        }}
-      >
-        <h3>Capturing Life's Beautiful Moments</h3>
-        <p>Professional Photography Services</p>
+        <div className={styles.logoWrapper}>
+        <img src="./Images/Logo.png" alt="Logo" className={styles.logo} />
+        <p className={styles.ownername}>Vaibhav Photography</p>
+        </div>
+        <div className={styles.midlind}></div>
+        <div className={styles.tags}>
+          <h3>Capturing Life's Beautiful Moments</h3>
+          <p>Professional Photography Services</p>
+        </div>
       </motion.div>
     </motion.div>
   );
 };
+const DeveloperCard = ({ isDarkMode }) => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [showCard, setShowCard] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768); 
+    };
+    checkScreenSize(); // run on mount
+    window.addEventListener('resize', checkScreenSize); 
+
+    return () => {
+      window.removeEventListener('resize', checkScreenSize); 
+    };
+  }, []);
+
+  useEffect(() => {
+   const portfolioSection = document.getElementById("about") || document.getElementById("contact");
+  if (!portfolioSection) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        setShowCard(entry.isIntersecting);
+      });
+    },
+    {
+      threshold: isMobile ? 0.3 : 0.5, 
+      rootMargin: isMobile ? '0px 0px -20% 0px' : '0px'
+    }
+  );
+
+  observer.observe(portfolioSection);
+
+  return () => {
+    observer.disconnect();
+  };
+}, [isMobile]); 
+
+  return (
+    <>
+      <AnimatePresence>
+        {showCard && (
+          <motion.div
+            className={styles.developerCardFloat}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <motion.button
+              onClick={() => setIsPopupOpen(true)}
+              className={styles.developerButton}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className={styles.developerButtonContent}>
+                <Code size={24} />
+                <span className={styles.developerButtonText}></span>
+              </div>
+              
+              {!isMobile && (
+        <div className={styles.developerTooltip}>
+          Developer Info
+          <div className={styles.tooltipArrow} />
+        </div>
+      )}
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+    <AnimatePresence>
+        {isPopupOpen && (
+          <motion.div
+            className={styles.developerPopupOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsPopupOpen(false)}
+          >
+            <motion.div
+              className={styles.developerPopup}
+              initial={{ scale: 0.5, opacity: 0, y: 50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.5, opacity: 0, y: 50 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <motion.button
+                onClick={() => setIsPopupOpen(false)}
+                className={styles.closeButton}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <X size={18} />
+              </motion.button>
+
+              {/* Main Card Content */}
+              <div className={styles.developerCard}>
+                {/* Header Section */}
+                <div className={styles.cardHeader}>
+                  
+                  <motion.div
+                    className={styles.profileImage}
+                    // initial={{ scale: 0, rotate: -180 }}
+                    // animate={{ scale: 1, rotate: 0 }}
+                    transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                  >
+                    {/* Replace this with your actual image */}
+                    {/* <User size={32} color="#ffffff" /> */}
+                    
+                    <img src="./Images/MyPic2.png" alt="Prajwal Patil" />
+                   
+                    {/* <div className={styles.statusIndicator}></div> */}
+                  </motion.div>
+                  
+                  <motion.div
+                    className={styles.profileInfo}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.6 }}
+                  >
+                     <h5 className={styles.developerTitle2}>Designed and Developed By</h5>
+                    <h3 className={styles.developerName}>Prajwal Patil</h3>
+                    <p className={styles.developerTitle}>Software Engineer</p>
+                  </motion.div>
+                </div>
+
+                {/* Content Section */}
+                <motion.div
+                  className={styles.cardContent}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.6 }}
+                >
+                  
+                  {/* Social Media Links */}
+                  <div className={styles.socialLinks}>
+                    <motion.a
+                      href="https://wa.me/your-number"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${styles.socialButton} ${styles.whatsapp}`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileTap={{ scale: 0.9 }}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.8, duration: 0.4 }}
+                    >
+                      <SiWhatsapp size={20} />
+                    </motion.a>
+
+                    <motion.a
+                      href="https://instagram.com/your-handle"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${styles.socialButton} ${styles.instagram}`}
+                      whileHover={{ scale: 1.1, rotate: -5 }}
+                      whileTap={{ scale: 0.9 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.0, duration: 0.4 }}
+                    >
+                      <SiInstagram size={20} />
+                    </motion.a>
+
+                    <motion.a
+                      href="mailto:your-email@example.com"
+                      className={`${styles.socialButton} ${styles.email}`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileTap={{ scale: 0.9 }}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 1.2, duration: 0.4 }}
+                    >
+                      <Mail size={20} />
+                    </motion.a>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Credits Footer */}
+              
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
 const Page = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -206,16 +405,35 @@ const Page = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState("right");
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  const homeImages = [
-    "./Images/HP8.png",
-    "./Images/HP3.png",
-    "./Images/HP1.png",
-    "./Images/HP4.png",
-    "./Images/HP5.png",
-    "./Images/HP6.png",
-    "./Images/HP22.png",
+  const DesktopImages = [
+    "./Images/NH1.jpg",
+    "./Images/NH2.jpg",
+    "./Images/NH3.jpg",
+    "./Images/NH4.jpg",
+    "./Images/NH5.jpg",
+    "./Images/NH6.jpg",
     "./Images/HP7.png",
+    "./Images/m1.png",
+    "./Images/NH8.jpg",
+    "./Images/NH9.jpg",
+    "./Images/HP6.png",
+    "./Images/NH11.jpg",
+    "./Images/Newm3.png",
+  ];
+
+  const MobileImages = [
+    "./Images/MI1.jpg",
+    "./Images/MI2.jpg",
+    "./Images/MI3.jpg",
+    "./Images/MI4.jpg",
+    "./Images/MI5.jpg",
+    "./Images/MI6.jpg",
+    "./Images/HP6.png",
+    "./Images/MI7.jpg",
+    "./Images/MI8.jpg",
+    "./Images/MI9.jpg",
   ];
 
   const services = [
@@ -247,7 +465,7 @@ const Page = () => {
       image: "./Images/Port4.jpg"
     },
     {
-      title: "Beautifull memory of colorful streets",
+      title: "Beautiful memory of colorful streets",
       subtitle: "Street Photography",
       description: "The times that shape the essence of who we are— Nikhil and Shreya, with each step through the colorful streets of town, are building moments that will forever define them. From playful banter to moments of shared quiet, every second spent together is weaving the very fabric of their love, one unforgettable memory at a time.",
       image: "./Images/Port7.jpg"
@@ -255,7 +473,7 @@ const Page = () => {
     {
       title: "Awaiting a new member",
       subtitle: "Baby Shower",
-      description: "Nisha and Rohan eagerly await the arrival of their first bundle of joy. Surrounded by blessings, laughter, and the gentle flutter of anticipation, their baby shower celebrates new beginnings, nurturing dreams, and the love that’s already blooming for their little one.",
+      description: "Nisha and Rohan eagerly await the arrival of their first bundle of joy. Surrounded by blessings, laughter, and the gentle flutter of anticipation, their baby shower celebrates new beginnings, nurturing dreams, and the love that's already blooming for their little one.",
       image: "./Images/Port8.jpg"
     },
     {
@@ -265,12 +483,46 @@ const Page = () => {
       image: "./Images/Port10.jpg"
     },
     {
-      title: " Complete with Love",
+      title: "Complete with Love",
       subtitle: "Family Photography",
-      description: "The joy of a complete family, wrapped in laughter, tiny hands, and shared memories. These portraits freeze time for a moment, capturing the everyday magic between parents and child. Because when hearts are full and smiles are genuine, happiness isn’t posed — it’s lived.",
+      description: "The joy of a complete family, wrapped in laughter, tiny hands, and shared memories. These portraits freeze time for a moment, capturing the everyday magic between parents and child. Because when hearts are full and smiles are genuine, happiness isn't posed — it's lived.",
       image: "./Images/Port9.jpg"
     }
   ];
+
+  const homeImages = isMobile ? MobileImages : DesktopImages;
+
+  const sections = [
+    { id: "home", label: "Home" },
+    { id: "portfolio", label: "Portfolio" },
+    { id: "services", label: "Services" },
+    { id: "about", label: "About" },
+    { id: "contact", label: "Contact" },
+  ];
+
+  // Scroll-based active section detection - FIXED VERSION
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 100; // Add offset for nav height
+      
+      sections.forEach(({ id }) => {
+        const element = document.getElementById(id);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+          
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(id);
+          }
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    // Call once on mount to set initial active section
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (imagesLoaded) {
@@ -282,16 +534,12 @@ const Page = () => {
   }, [imagesLoaded]);
 
   useEffect(() => {
-    document.body.className = isDarkMode ? "darkTheme" : "lightTheme";
-  }, [isDarkMode]);
-
-  const sections = [
-    { id: "home", label: "Home" },
-    { id: "portfolio", label: "Portfolio" },
-    { id: "services", label: "Services" },
-    { id: "about", label: "About" },
-    { id: "contact", label: "Contact" },
-  ];
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -318,32 +566,39 @@ const Page = () => {
     );
   };
 
-  const variants = {
+  const carouselVariants = {
     enter: (direction) => ({
-      x: direction === "right" ? "100%" : "-130%",
+      x: direction === "right" ? "100%" : "-100%",
       opacity: 0,
-      transition: {
-        type: "tween",
-        duration: 0,
-        ease: "easeInOut",
-      },
+      scale: 0.95,
+      rotateY: direction === "right" ? 15 : -15,
     }),
     center: {
       x: 0,
       opacity: 1,
+      scale: 1,
+      rotateY: 0,
       transition: {
-        type: "tween",
-        duration: 0.8,
-        ease: "easeInOut",
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+        opacity: { duration: 0.4 },
+        scale: { duration: 0.6 },
+        rotateY: { duration: 0.6 }
       },
     },
     exit: (direction) => ({
-      x: direction === "right" ? "100%" : "-100%",
-      opacity: 0.1,
+      x: direction === "right" ? "-100%" : "100%",
+      opacity: 0,
+      scale: 0.95,
+      rotateY: direction === "right" ? -15 : 15,
       transition: {
-        type: "tween",
-        duration: 0.2,
-        ease: "easeInOut",
+        type: "spring",
+        stiffness: 400,
+        damping: 40,
+        opacity: { duration: 0.3 },
+        scale: { duration: 0.4 },
+        rotateY: { duration: 0.4 }
       },
     }),
   };
@@ -360,34 +615,35 @@ const Page = () => {
   if (!imagesLoaded) {
     return <ImagePreloader onLoadComplete={() => setImagesLoaded(true)} />;
   }
-
   return (
-    <div className={isDarkMode ? "darkTheme" : "lightTheme"}>
+    <div className={isDarkMode ? styles.darkTheme : styles.lightTheme}>
       <AnimatePresence>{loading && <PreLoader />}</AnimatePresence>
       
-      <nav className={`nav ${isDarkMode ? "darkTheme" : "lightTheme"}`}>
+      {/* Navigation */}
+      <nav className={styles.nav}>
         <motion.div
-          className="navContent"
+          className={styles.navContent}
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 4.2, duration: 0.5 }}
         >
           <motion.div
-            className="logo"
+            className={styles.logoContainer}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <img
               src={isDarkMode ? "./Images/Logo.png" : "./Images/Logo2.png"}
               alt="Logo"
+              className={styles.logo}
             />
           </motion.div>
 
-          <div className={`navLinks ${isMenuOpen ? "active" : ""}`}>
+          <div className={`${styles.navLinks} ${isMenuOpen ? styles.active : ''}`}>
             {sections.map(({ id, label }) => (
               <motion.button
                 key={id}
-                className={`navLink ${activeSection === id ? "active" : ""}`}
+                className={`${styles.navLink} ${activeSection === id ? styles.navLinkActive : ''}`}
                 onClick={() => scrollToSection(id)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -396,12 +652,12 @@ const Page = () => {
               </motion.button>
             ))}
             
-            <div className="socialLinks">
+            <div className={styles.socialLinks}>
               <motion.a
                 href="https://instagram.com/vaibhav_photography"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="socialLink"
+                className={styles.socialLink}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -412,7 +668,7 @@ const Page = () => {
                 href="https://wa.me/919482527676"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="socialLink"
+                className={styles.socialLink}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -421,9 +677,8 @@ const Page = () => {
             </div>
             
             <motion.button
-              className="themeToggle"
+              className={styles.themeToggle}
               onClick={toggleTheme}
-              title={isDarkMode ? "Light Mode" : "Dark Mode"}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -432,7 +687,7 @@ const Page = () => {
           </div>
 
           <button
-            className="menuButton"
+            className={styles.menuButton}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <Menu size={24} />
@@ -440,66 +695,93 @@ const Page = () => {
         </motion.div>
       </nav>
 
-      <main className="main">
-        <section id="home" className="section">
-          <div className="carousel">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                className="imageContainer"
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-              >
-                <img 
-                  src={homeImages[currentIndex]} 
-                  alt={`Portfolio ${currentIndex + 1}`}
-                  className="carouselImage"
-                />
-              </motion.div>
-            </AnimatePresence>
-            <button
-              className="arrow left"
+      <main className={styles.main} style={{backgroundImage: `url(${isDarkMode ? "./Images/BC7.jpg" : "./Images/Background2.jpg"})`}}>
+        {/* Home Section */}
+        <section id="home" className={styles.section}>
+          <div className={styles.carousel}>
+            <div className={styles.imageContainer}>
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={currentIndex}
+                  className={styles.carouselImageWrapper}
+                  custom={direction}
+                  variants={carouselVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                >
+                  <img 
+                    src={homeImages[currentIndex]} 
+                    alt={`Portfolio ${currentIndex + 1}`}
+                    className={styles.carouselImage}
+                  />
+                  <div className={styles.imageOverlay} />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <motion.button
+              className={`${styles.arrow} ${styles.left}`}
               onClick={handlePrevious}
+             
+              whileTap={{ scale: 0.9 }}
             >
               &#x276E;
-            </button>
-            <button
-              className="arrow right"
+            </motion.button>
+
+            <motion.button
+              className={`${styles.arrow} ${styles.right}`}
               onClick={handleNext}
+            
+              whileTap={{ scale: 0.9 }}
             >
               &#x276F;
-            </button>
-          </div>
-          <div className="mobilescreen"   style={isDarkMode ? { color: "#fff" } : { color: "#111" }}>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 4.5, duration: 0.8 }}
-            
-            >
-              Your Vision. Our Lens.
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 4.8, duration: 0.8 }}
-            >
-              Professional Photography Services
-            </motion.p>
+            </motion.button>
+
+            <div className={styles.heroContent}>
+              <motion.h1
+                className={styles.heroTitle}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 4.5, duration: 0.8 }}
+              >
+                Your Vision. Our Lens.
+              </motion.h1>
+              <motion.p
+                className={styles.heroSubtitle}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 4.8, duration: 0.8 }}
+              >
+                Professional Photography Services
+              </motion.p>
+            </div>
+
+            <div className={styles.imageIndicators}>
+              {homeImages.map((_, index) => (
+                <button
+                  key={index}
+                  className={`${styles.indicator} ${index === currentIndex ? styles.indicatorActive : ''}`}
+                  onClick={() => {
+                    const newDirection = index > currentIndex ? "left" : "right";
+                    setDirection(newDirection);
+                    setCurrentIndex(index);
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </section>
 
-        <section id="portfolio" className="section">
+        {/* Portfolio Section */}
+        <section id="portfolio" className={styles.portfolio}>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="portfolio"
           >
             <motion.h2
+              className={styles.sectionHeading}
               initial={{ x: -100, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -508,23 +790,49 @@ const Page = () => {
               Portfolio
             </motion.h2>
             
-            <div className="portfolioStories">
+            <div className={styles.portfolioStories}>
               {portfolioStories.map((story, index) => (
                 <motion.div
                   key={index}
-                  className="storyCard"
+                  className={styles.storyCard}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.2, duration: 0.6 }}
                 >
-                  <div className="storyImage">
-                    <img src={story.image} alt={story.title} />
+                  <div className={styles.storyImage}>
+                    <motion.img 
+                      src={story.image} 
+                      alt={story.title}
+                      whileHover={{ scale: 1.05, rotate: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
                   </div>
-                  <div className="storyContent">
-                    <h3>{story.title}</h3>
-                    <h4>{story.subtitle}</h4>
-                    <p>{story.description}</p>
+                  <div className={styles.storyContent}>
+                    <motion.h3 
+                      initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3, duration: 0.6 }}
+                    >
+                      {story.title}
+                    </motion.h3>
+                    <motion.h4 
+                      initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4, duration: 0.6 }}
+                    >
+                      {story.subtitle}
+                    </motion.h4>
+                    <motion.p 
+                      initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5, duration: 0.6 }}
+                    >
+                      {story.description}
+                    </motion.p>
                   </div>
                 </motion.div>
               ))}
@@ -532,14 +840,15 @@ const Page = () => {
           </motion.div>
         </section>
 
-        <section id="services" className="section">
+        {/* Services Section */}
+        <section id="services" className={styles.services}>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="services"
           >
             <motion.h2
+              className={styles.sectionHeading}
               initial={{ x: -100, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -548,100 +857,106 @@ const Page = () => {
               Our Services
             </motion.h2>
             
-            <div className="serviceGrid">
+            <div className={styles.serviceGrid}>
               {services.map((service, index) => (
                 <motion.div
                   key={index}
-                  className="serviceCard"
+                  className={styles.serviceCard}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  whileHover={{ y: -10 }}
+                  whileHover={{ y: -10, scale: 1.02 }}
                 >
-                  <div className="serviceImageContainer">
-                    <img src={service.image} alt={service.name} />
+                  <div className={styles.serviceImageContainer}>
+                    <img 
+                      src={service.image} 
+                      alt={service.name}
+                    />
+                    <div className={styles.serviceOverlay} />
                   </div>
-                  <h3>{service.name}</h3>
+                  <div className={styles.serviceContent}>
+                    <h3>{service.name}</h3>
+                  </div>
                 </motion.div>
               ))}
             </div>
           </motion.div>
         </section>
 
-        <section id="about" className="section">
-         <motion.div
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  className="about"
->
-  <motion.h2
-    initial={{ x: -100, opacity: 0 }}
-    whileInView={{ x: 0, opacity: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.8 }}
-  >
-    About Us
-  </motion.h2>
+        {/* About Section */}
+        <section id="about" className={styles.about}>
+          <motion.div
+            className={styles.aboutContent}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <motion.h2
+              className={styles.sectionHeading}
+              initial={{ x: -100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              About Us
+            </motion.h2>
 
-  <motion.div
-    className="logo"
-    initial={{
-      scale: 0,
-      rotate: -5,
-      opacity: 0,
-      filter: "blur(50px)",
-    }}
-    whileInView={{
-      scale: 1,
-      rotate: 0,
-      opacity: 1,
-      filter: "blur(0px)",
-    }}
-    viewport={{ once: true }}
-    transition={{
-      delay: 0.5, 
-      duration: 0.8,
-      type: "spring",
-      stiffness: 100,
-    }}
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      textAlign: "center",
-      marginTop: "-1rem",
-      marginLeft: "29rem",
-    }}
-  >
-    <img src={isDarkMode ?`./Images/Logo.png`:`./Images/Logo2.png`} alt="Logo" style={{ width: "200px", height: "auto" }} />
-    <p className="ownername" style={{ marginTop: "0.1rem", marginLeft:"3em",fontSize:"1em", fontWeight: "400", marginBottom: "1rem",color: "#a79090" }}>
-      Vaibhav Photography
-    </p>
-  </motion.div>
+            <motion.div
+              className={styles.aboutLogo}
+              initial={{
+                scale: 0,
+                rotate: -5,
+                opacity: 0,
+                filter: "blur(50px)",
+              }}
+              whileInView={{
+                scale: 1,
+                rotate: 0,
+                opacity: 1,
+                filter: "blur(0px)",
+              }}
+              viewport={{ once: true }}
+              transition={{
+                delay: 0.5, 
+                duration: 0.8,
+                type: "spring",
+                stiffness: 100,
+              }}
+            >
+              <img 
+                src={isDarkMode ? "./Images/Logo.png" : "./Images/Logo2.png"} 
+                alt="Logo" 
+                className={styles.logo} 
+              />
+              <p className={styles.ownername2}>Vaibhav Photography</p>
+            </motion.div>
 
-  <div className="aboutContent">
-    <p>
-      With a passion for capturing life's most precious moments, I specialize in 
-      creating timeless memories through the art of photography. From intimate family 
-      portraits to grand wedding celebrations, every shot tells a unique story.
-    </p>
-  </div>
-</motion.div>
-
-          
+            <motion.div
+              className={styles.aboutText}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+            >
+              <p>
+                With a passion for capturing life's most precious moments, I specialize in 
+                creating timeless memories through the art of photography. From intimate family 
+                portraits to grand wedding celebrations, every shot tells a unique story.
+              </p>
+            </motion.div>
+          </motion.div>
         </section>
 
-        <section id="contact" className="section">
+        {/* Contact Section */}
+        <section id="contact" className={styles.contact}>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="contact"
           >
             <motion.h2
+              className={styles.sectionHeading}
               initial={{ x: -100, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -650,761 +965,52 @@ const Page = () => {
               Contact Me
             </motion.h2>
             <p>Below are the details to reach out to me!</p>
-            <div className="contactGrid">
-              <motion.div 
-                className="contactItem"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="iconWrapper">
-                  <MapPin className="icon" />
-                </div>
-                <h4>ADDRESS</h4>
-                <p>Chikodi, Karnataka, India</p>
-              </motion.div>
-              <motion.div 
-                className="contactItem"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="iconWrapper">
-                  <Phone className="icon" />
-                </div>
-                <h4>CONTACT NUMBER</h4>
-                <p>+91 94825276</p>
-              </motion.div>
-              <motion.div 
-                className="contactItem"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="iconWrapper">
-                  <Mail className="icon" />
-                </div>
-                <h4>EMAIL ADDRESS</h4>
-                <p>prajwalapat5@gmail.com</p>
-              </motion.div>
-              <motion.div 
-                className="contactItem"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="iconWrapper">
-                  <BookCheck className="icon" />
-                </div>
-                <h4>Google Form</h4>
-                <p>Help Us To Reach You Out</p>
-              </motion.div>
+            
+            <div className={styles.contactGrid}>
+              {[
+                { icon: MapPin, title: "ADDRESS", content: "Chikodi, Karnataka, India" },
+                { icon: Phone, title: "CONTACT NUMBER", content: "+91 94825276" },
+                { icon: Mail, title: "EMAIL ADDRESS", content: "prajwalapat5@gmail.com" },
+                { icon: BookCheck, title: "Google Form", content: "Help Us To Reach You Out" }
+              ].map((item, index) => (
+                <motion.div 
+                  key={index}
+                  className={styles.contactItem}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                >
+                  <div className={styles.iconWrapper}>
+                    <item.icon className={styles.icon} size={24} />
+                  </div>
+                  <h4>{item.title}</h4>
+                  <p>{item.content}</p>
+                </motion.div>
+              ))}
             </div>
+          </motion.div>
+        </section>
+
+        {/* Thank You Section */}
+        <section id="thankyou" className={styles.thankyouContainer}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className={styles.thankyouHeading}>Thank You</h2>
+            <p className={styles.thankyouMessage}>
+              We truly appreciate your interest in our services. Feel free to reach out—we're excited to connect with you!
+            </p>
           </motion.div>
         </section>
       </main>
 
-      <style jsx>{`
-        @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap");
-
-        :root {
-          --primary-font: "Poppins", sans-serif;
-          --heading-font: "Playfair Display", serif;
-        }
-
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          font-family: var(--primary-font);
-        }
-
-        body {
-          background: var(--bg-primary);
-          color: var(--text-primary);
-          transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-         .imagePreloader {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background: linear-gradient(135deg, #111 0%, #222 100%);
-          z-index: 2000;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .preloaderContent {
-          text-align: center;
-          color: #fff;
-        }
-
-        .preloaderContent h2 {
-          font-size: 2rem;
-          margin-bottom: 2rem;
-          background: linear-gradient(45deg, #ffd700, #ff6b6b);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          font-weight: 600;
-          font-family: 'Poppins', sans-serif;
-        }
-
-        .loaderContainer {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 1rem;
-        }
-
-        .spinner {
-          animation: spin 1s linear infinite;
-          color: #ffd700;
-        }
-
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-
-        
-        .progressBar {
-          width: 300px;
-          height: 4px;
-          background: rgba(255, 255, 255, 0.2);
-          border-radius: 2px;
-          overflow: hidden;
-        }
-
-        .progressFill {
-          height: 100%;
-          background: linear-gradient(45deg, #ffd700, #ff6b6b);
-          border-radius: 2px;
-          transition: width 0.3s ease;
-        }
-
-        .preloaderContent p {
-          color: #fff;
-          font-size: 1rem;
-          font-family: 'Poppins', sans-serif;
-          margin: 0;
-        }
-
-        .preloader {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background: #111;
-          z-index: 1000;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          overflow: hidden;
-        }
-
-        .imageGrid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-          position: absolute;
-          width: 90%;
-          max-width: 1200px;
-        }
-
-        .imageGrid img {
-          width: 100%;
-          height: 200px;
-          object-fit: cover;
-          border-radius: 8px;
-          box-shadow: 0 4px 10px rgba(7, 7, 7, 0.3);
-        }
-
-        .darkTheme {
-          --bg-primary: #111;
-          --bg-secondary: #222;
-          --text-primary: #fff;
-          --text-secondary: #ccc;
-          --nav-bg: rgba(17, 17, 17, 0.95);
-          --input-bg: rgba(34, 34, 34, 0.8);
-          --card-bg: rgba(255, 255, 255, 0.05);
-        }
-
-        .lightTheme {
-          --bg-primary: #fff;
-          --bg-secondary: #f5f5f5;
-          --text-primary: #111;
-          --text-secondary: #444;
-          --nav-bg: rgba(255, 255, 255, 0.95);
-          --input-bg: rgba(245, 245, 245, 0.8);
-          --card-bg: rgba(0, 0, 0, 0.05);
-        }
-
-        .logo {
-          width: 220px;
-          height: auto;
-          position: relative;
-          z-index: 2;
-          filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
-        }
-
-        .ownername {
-          width: 15em;
-          text-align: left;
-          font-size: 1.2em;
-        }
-
-        .logo img {
-          width: 100%;
-          height: auto;
-          object-fit: contain;
-        }
-
-        .tags {
-          margin-top: 2em;
-          color: #a79090;
-          text-align: center;
-        }
-
-        .mobilescreen {
-          display: flex;
-          flex-direction: column;
-          text-align: center;
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          // z-index: 10;
-          color: #fff;
-          text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-        }
-
-        .mobilescreen h1 {
-          font-size: 2rem;
-          font-weight: 700;
-          margin-bottom: 0.2rem;
-          // background: linear-gradient(45deg, #ffd700, #ff6b6b);
-          -webkit-background-clip: text;
-          // -webkit-text-fill-color: transparent;
-        }
-
-        .nav {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          background: var(--nav-bg);
-          transition: background-color 0.3s ease;
-          backdrop-filter: blur(10px);
-          z-index: 200;
-          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .menuButton {
-          display: none;
-          background: none;
-          border: none;
-          color: var(--text-primary);
-          cursor: pointer;
-          padding: 0.5rem;
-        }
-
-        .navContent {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0.8rem 2rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .navContent .logo {
-          width: 80px;
-          height: auto;
-        }
-
-        .navLinks {
-          display: flex;
-          gap: 2.5rem;
-          align-items: center;
-        }
-
-        .navLink {
-          color: var(--text-primary);
-          text-decoration: none;
-          font-size: 1rem;
-          padding: 0.5rem 1rem;
-          border: none;
-          background: none;
-          cursor: pointer;
-          position: relative;
-          transition: all 0.3s ease;
-          font-weight: 500;
-          letter-spacing: 0.5px;
-        }
-
-        .navLink::after {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          width: 0;
-          height: 2px;
-          background: linear-gradient(45deg, #ffd700, #ff6b6b);
-          transition: all 0.3s ease;
-          transform: translateX(-50%);
-        }
-
-        .navLink:hover {
-          color: #ffd700;
-        }
-
-        .navLink:hover::after,
-        .navLink.active::after {
-          width: 100%;
-        }
-
-        .socialLinks {
-          display: flex;
-          gap: 1rem;
-          align-items: center;
-        }
-
-        .socialLink {
-          color: var(--text-primary);
-          transition: all 0.3s ease;
-          padding: 0.5rem;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .socialLink:hover {
-          color: #ffd700;
-          background: var(--card-bg);
-        }
-
-        .main {
-          padding-top: 80px;
-        }
-
-        .section {
-          position: relative;
-          width: 100%;
-          min-height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 2rem 0;
-        }
-
-        .carousel {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          overflow: hidden;
-        }
-
-        .imageContainer {
-          position: absolute;
-          width: 100%;
-          height: 91%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .carouselImage {
-          width: 95%;
-          height: 95%;
-          // padding: 1rem;
-          object-fit: cover;
-          border-radius: 8px;
-          // z-index: 100;
-        }
-
-        .arrow {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          background: rgba(26, 26, 26, 0.2);
-          color: #fff;
-          border: none;
-          border-radius: 50%;
-          width: 70px;
-          height: 70px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 18px;
-          cursor: pointer;
-          z-index: 101;
-          transition: background 0.3s ease;
-        }
-
-        .arrow:hover {
-          background: rgba(0, 0, 0, 0.5);
-          transform: translateY(-50%) scale(1.1);
-        }
-
-        .left {
-          left: 20px;
-        }
-
-        .right {
-          right: 20px;
-        }
-
-        .portfolio,
-        .services,
-        .contact,
-        .about {
-          width: 100%;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 2rem;
-          margin-top: 6rem;
-        }
-
-        h2 {
-          font-family: arial, sans-serif;
-          font-size: 3rem;
-          margin-bottom: 3rem;
-          text-align: center;
-          background: linear-gradient(45deg, #ffd700, #ff6b6b);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .portfolioStories {
-          display: flex;
-          flex-direction: column;
-          gap: 4rem;
-        }
-
-        .storyCard {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 3rem;
-          align-items: center;
-          padding: 2rem;
-          background: var(--card-bg);
-          border-radius: 20px;
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .storyCard:nth-child(even) {
-          direction: rtl;
-        }
-
-        .storyCard:nth-child(even) .storyContent {
-          direction: ltr;
-        }
-
-        .storyImage {
-          width: 100%;
-          height: 400px;
-          border-radius: 15px;
-          overflow: hidden;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .storyImage img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.3s ease;
-        }
-
-        .storyCard:hover .storyImage img {
-          transform: scale(1.05);
-        }
-
-        .storyContent h3 {
-          font-size: 2rem;
-          font-family: var(--text-secondary);
-          color: var(--text-primary);
-          margin-bottom: 0.5rem;
-        }
-
-        .storyContent h4 {
-          font-size: 1.2rem;
-          color: #2ddef3;
-          margin-bottom: 1rem;
-          font-weight: 500;
-        }
-
-        .storyContent p {
-          font-size: 0.9rem;
-          font-wight: 100;
-          line-height: 1.6;
-          color: var(--text-secondary);
-        }
-
-        .serviceGrid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 2rem;
-          margin-top: 2rem;
-        }
-
-        .serviceCard {
-          background: var(--card-bg);
-          border-radius: 15px;
-          padding: 1.5rem;
-          padding-bottom: 0.2rem;
-          text-align: center;
-          transition: all 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-        }
-
-        .serviceCard:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .serviceImageContainer {
-          width: 100%;
-          height: 350px;
-          border-radius: 15px;
-          overflow: hidden;
-          margin-bottom: 1.5rem;
-          position: relative;
-        }
-
-        .serviceImageContainer img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.3s ease;
-        }
-
-        .serviceCard:hover .serviceImageContainer img {
-          transform: scale(1.1);
-        }
-
-        .serviceCard h3 {
-          font-size: 1rem;
-          font-weight: 400;
-          color: var(--text-primary);
-          margin-bottom: 1rem;
-        }
-
-        .about {
-          text-align: center;
-        }
-
-        .aboutContent {
-          max-width: 800px;
-          margin: 0 auto;
-        }
-
-        .aboutContent p {
-          font-size: 1rem;
-          line-height: 1.6;
-          margin-top: 1rem;
-          color: var(--text-secondary);
-        }
-
-        .contact p {
-          font-size: 1.2rem;
-          margin-bottom: 40px;
-          text-align: center;
-        }
-
-        .contact h2 {
-          font-size: 2.5rem;
-          font-weight: bold;
-        }
-
-        .contactGrid {
-          display: flex;
-          justify-content: center;
-          gap: 30px;
-          flex-wrap: wrap;
-        }
-
-        .contactItem {
-          padding: 20px 20px;
-          text-align: center;
-          width: 300px;
-          background: var(--card-bg);
-          border-radius: 20px;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          transition: all 0.3s ease;
-        }
-
-        .contactItem:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .iconWrapper {
-          background: linear-gradient(45deg, rgb(167, 144, 144));
-          width: 70px;
-          height: 70px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 15px;
-          box-shadow: 0 5px 15px rgba(103, 102, 101, 0.3);
-        }
-
-        .icon {
-          color: #fff;
-          font-size: 2rem;
-        }
-
-        .contactItem h4 {
-          font-size: 1rem;
-          font-weight: bold;
-          margin-bottom: 10px;
-          color: var(--text-primary);
-        }
-
-        .contactItem p {
-          font-size: 0.9rem;
-          color: var(--text-secondary);
-        }
-
-        .themeToggle {
-          background: none;
-          border: none;
-          color: var(--text-primary);
-          cursor: pointer;
-          padding: 0.5rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          transition: all 0.3s ease;
-        }
-
-        .themeToggle:hover {
-          background: var(--card-bg);
-          color: #ffd700;
-        }
-
-        @media (max-width: 768px) {
-          .imageGrid {
-            grid-template-columns: repeat(2, 1fr);
-            width: 95%;
-          }
-
-          .menuButton {
-            display: block;
-          }
-
-          .imageGrid img {
-            height: 150px;
-          }
-
-          .navLinks {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: var(--nav-bg);
-            flex-direction: column;
-            padding: 1rem;
-            gap: 1rem;
-            transform: translateY(-100%);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-          }
-
-          .navLinks.active {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: all;
-          }
-
-          .socialLinks {
-            order: -1;
-          }
-
-          .contactGrid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-          }
-
-          .mobilescreen h1 {
-            font-size: 2.5rem;
-          }
-
-          .mobilescreen p {
-            font-size: 1rem;
-          }
-
-          .storyCard {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-          }
-
-          .storyCard:nth-child(even) {
-            direction: ltr;
-          }
-
-          .serviceGrid {
-            grid-template-columns: 1fr;
-          }
-
-          h2 {
-            font-size: 2.5rem;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .mobilescreen h1 {
-            font-size: 2rem;
-          }
-
-          .tags {
-            margin-top: 1.2em;
-            font-size: 0.9em;
-          }
-
-          .arrow {
-            width: 50px;
-            height: 50px;
-            font-size: 14px;
-          }
-
-          .left {
-            left: 10px;
-          }
-
-          .right {
-            right: 10px;
-          }
-
-          .storyImage {
-            height: 250px;
-          }
-
-          .serviceImageContainer {
-            height: 150px;
-          }
-
-          .preloaderContent h2 {
-            font-size: 1.5rem;
-          }
-
-          .progressBar {
-            width: 250px;
-          }
-        }
-      `}</style>
+      {/* Developer Card */}
+      <DeveloperCard isDarkMode={isDarkMode} />
     </div>
   );
 };
