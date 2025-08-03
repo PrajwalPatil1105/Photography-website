@@ -908,7 +908,7 @@ color: #656262;
 .developerCardFloat {
   position: fixed;
   bottom: 2rem;
-  right: 2rem;
+  right: 1rem;
   z-index: 40;
 }
 
@@ -916,9 +916,9 @@ color: #656262;
   background: var(--nav-bg);
   color: var(--text-primary);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 8px 8px;
-  padding-right: 3px;
-  border-radius: 8px;
+  padding: 4px 8px;
+  padding-right: 8px;
+  border-radius: 4px;
   cursor: pointer;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
@@ -1130,6 +1130,13 @@ color: #656262;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  color: var(--text-primary);
+}
+
+.typingText{
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
   color: var(--text-primary);
 }
 

@@ -206,8 +206,61 @@ const PreLoader = () => {
     </motion.div>
   );
 };
-const DeveloperCard = ({ isDarkMode }) => {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+const TypingAnimation = ({ text, delay = 0, speed = 50, repeat = true }) => {
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(false);
+  const [showCursor, setShowCursor] = useState(true);
+
+  useEffect(() => {
+    const startTyping = () => {
+      setIsTyping(true);
+      setCurrentIndex(0);
+      setDisplayText('');
+    };
+
+    const timeout = setTimeout(startTyping, delay);
+    return () => clearTimeout(timeout);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!isTyping) return;
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, 100);
+      return () => clearTimeout(timeout);
+    } else {
+      const timeout = setTimeout(() => {
+        if (repeat) {
+          setDisplayText('');
+          setCurrentIndex(0);
+        } else {
+          setIsTyping(false);
+        }
+      }, 5000); 
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, text, speed, repeat, isTyping]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 530);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <span className={styles.typingText}>
+      {displayText}
+      <span className={`${styles.cursor} ${showCursor ? styles.visible : ''}`}> </span>
+    </span>
+  );
+};
+const DeveloperCard = ({  isDarkMode, isPopupOpen, setIsPopupOpen }) => {
+  // const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [showCard, setShowCard] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -264,15 +317,14 @@ const DeveloperCard = ({ isDarkMode }) => {
               whileTap={{ scale: 0.95 }}
             >
               <div className={styles.developerButtonContent}>
-                <Code size={18} />
+                <Code size={15} />
                 <span className={styles.developerButtonText}></span>
               </div>
               
               {!isMobile && (
-        <div className={styles.developerTooltip}>
-          Developer Info
-          <div className={styles.tooltipArrow} />
-        </div>
+                 <div className={styles.developerButtonText}>
+                  <TypingAnimation text="Developer Info" delay={500} speed={80} />
+                </div>
       )}
             </motion.button>
           </motion.div>
@@ -409,7 +461,7 @@ const Page = () => {
   const [direction, setDirection] = useState("right");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isDownloading, setIsDownloading] = useState(false);
-
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
 
 
@@ -717,6 +769,19 @@ const Page = () => {
               >
                 <SiWhatsapp size={20} />
               </motion.a>
+              <motion.button
+                className={styles.socialLink}
+               onClick={() => {
+                  setIsPopupOpen(true);
+                  setIsMenuOpen(!isMenuOpen);
+                }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                title="Developer Info"
+                style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+              >
+                <Code size={20} />
+              </motion.button>
             </div>
             
             <motion.button
@@ -1209,7 +1274,9 @@ const Page = () => {
       </main>
 
       {/* Developer Card */}
-      <DeveloperCard isDarkMode={isDarkMode} />
+      <DeveloperCard isDarkMode={isDarkMode}
+        isPopupOpen={isPopupOpen}
+        setIsPopupOpen={setIsPopupOpen} />
     </div>
   );
 };
