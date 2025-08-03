@@ -68,7 +68,9 @@ const ImagePreloader = ({ onLoadComplete }) => {
     "./Images/Port7.jpg",
     "./Images/Port8.jpg",
     "./Images/Port10.jpg",
-    "./Images/Port9.jpg"
+    "./Images/Port9.jpg",
+    "./Images/MyPic2.png",
+    "./Images/Background2.jpg"
   ];
 
   useEffect(() => {
@@ -110,7 +112,7 @@ const ImagePreloader = ({ onLoadComplete }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          You Almost Reached the Best Photography Website
+       Hold Still...   Just Like the Perfect Shot!
         </motion.h2>
         <motion.div
           className={styles.loaderContainer}
@@ -262,7 +264,7 @@ const DeveloperCard = ({ isDarkMode }) => {
               whileTap={{ scale: 0.95 }}
             >
               <div className={styles.developerButtonContent}>
-                <Code size={24} />
+                <Code size={18} />
                 <span className={styles.developerButtonText}></span>
               </div>
               
@@ -331,7 +333,7 @@ const DeveloperCard = ({ isDarkMode }) => {
                   >
                      <h5 className={styles.developerTitle2}>Designed and Developed By</h5>
                     <h3 className={styles.developerName}>Prajwal Patil</h3>
-                    <p className={styles.developerTitle}>Software Engineer</p>
+                    <p className={styles.developerTitle}>Web Developer</p>
                   </motion.div>
                 </div>
 
@@ -346,7 +348,7 @@ const DeveloperCard = ({ isDarkMode }) => {
                   {/* Social Media Links */}
                   <div className={styles.socialLinks}>
                     <motion.a
-                      href="https://wa.me/your-number"
+                      href="https://wa.me/9482527646"
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`${styles.socialButton} ${styles.whatsapp}`}
@@ -360,7 +362,7 @@ const DeveloperCard = ({ isDarkMode }) => {
                     </motion.a>
 
                     <motion.a
-                      href="https://instagram.com/your-handle"
+                      href="https://instagram.com/prajwal_05_11"
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`${styles.socialButton} ${styles.instagram}`}
@@ -374,7 +376,7 @@ const DeveloperCard = ({ isDarkMode }) => {
                     </motion.a>
 
                     <motion.a
-                      href="mailto:your-email@example.com"
+                      href="mailto:prajwalapatil555@gmail.com"
                       className={`${styles.socialButton} ${styles.email}`}
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
@@ -406,6 +408,10 @@ const Page = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState("right");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+
+
 
   const DesktopImages = [
     "./Images/NH1.jpg",
@@ -499,6 +505,35 @@ const Page = () => {
     { id: "about", label: "About" },
     { id: "contact", label: "Contact" },
   ];
+
+
+  const handleDownloadPortfolio = async () => {
+  setIsDownloading(true);
+  
+  try {
+    // Simulate download delay for animation
+    await new Promise(resolve => setTimeout(resolve, 2500));
+    
+    // Create download link
+    const link = document.createElement('a');
+    link.href = './portfolio/Vaibhav_Photography_Portfolio.pdf'; // Path to your PDF file
+    link.download = 'Vaibhav_Photography_Portfolio.pdf';
+    link.target = '_blank';
+    
+    // Trigger download
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+  } catch (error) {
+    console.error('Download failed:', error);
+  } finally {
+    // Reset downloading state after animation completes
+    setTimeout(() => {
+      setIsDownloading(false);
+    }, 500);
+  }
+};
 
   // Scroll-based active section detection - FIXED VERSION
   useEffect(() => {
@@ -620,7 +655,15 @@ const Page = () => {
       <AnimatePresence>{loading && <PreLoader />}</AnimatePresence>
       
       {/* Navigation */}
-      <nav className={styles.nav}>
+     <nav
+  className={styles.nav}
+  style={{
+    boxShadow: isDarkMode
+      ? "0 0px 20px rgba(42, 41, 41, 0.2)"
+      : "0 0px 20px rgba(0, 0, 0, 0.2)",
+  }}
+>
+
         <motion.div
           className={styles.navContent}
           initial={{ y: -50, opacity: 0 }}
@@ -654,7 +697,7 @@ const Page = () => {
             
             <div className={styles.socialLinks}>
               <motion.a
-                href="https://instagram.com/vaibhav_photography"
+                href="https://instagram.com/vaibhavpotadar_"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
@@ -665,7 +708,7 @@ const Page = () => {
               </motion.a>
               
               <motion.a
-                href="https://wa.me/919482527676"
+                href="https://wa.me/7338320035"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
@@ -695,7 +738,8 @@ const Page = () => {
         </motion.div>
       </nav>
 
-      <main className={styles.main} style={{backgroundImage: `url(${isDarkMode ? "./Images/BC7.jpg" : "./Images/Background2.jpg"})`}}>
+      {/* <main className={styles.main} style={{backgroundImage: `url(${isDarkMode ? "./Images/BC11.jpg" : "./Images/Background2.jpg"})`}}> */}
+      <main className={styles.main} style={{backgroundImage: `url(${isDarkMode ? "" : "./Images/Background2.jpg"})`}}>
         {/* Home Section */}
         <section id="home" className={styles.section}>
           <div className={styles.carousel}>
@@ -774,71 +818,146 @@ const Page = () => {
         </section>
 
         {/* Portfolio Section */}
-        <section id="portfolio" className={styles.portfolio}>
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <motion.h2
-              className={styles.sectionHeading}
-              initial={{ x: -100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
+
+
+{/* Portfolio Section */}
+<section id="portfolio" className={styles.portfolio}>
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+  >
+    <motion.h2
+      className={styles.sectionHeading}
+      initial={{ x: -100, opacity: 0 }}
+      whileInView={{ x: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
+      Portfolio
+    </motion.h2>
+    
+    <div className={styles.portfolioStories}>
+      {portfolioStories.map((story, index) => (
+        <motion.div
+          key={index}
+          className={styles.storyCard}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.2, duration: 0.6 }}
+        >
+          <div className={styles.storyImage}>
+            <motion.img 
+              src={story.image} 
+              alt={story.title}
+              whileHover={{ scale: 1.05, rotate: 1 }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+          <div className={styles.storyContent}>
+            <motion.h3 
+              initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
             >
-              Portfolio
-            </motion.h2>
-            
-            <div className={styles.portfolioStories}>
-              {portfolioStories.map((story, index) => (
+              {story.title}
+            </motion.h3>
+            <motion.h4 
+              initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              {story.subtitle}
+            </motion.h4>
+            <motion.p 
+              initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+            >
+              {story.description}
+            </motion.p>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+
+    {/* Download Portfolio Button */}
+    <motion.div
+      className={styles.downloadSection}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.5, duration: 0.8 }}
+    >
+      <motion.button
+        className={styles.downloadButton}
+        onClick={handleDownloadPortfolio}
+        disabled={isDownloading}
+        whileHover={{ scale: 1.05, y: -2 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <motion.div className={styles.downloadButtonContent}>
+          <AnimatePresence mode="wait">
+            {isDownloading ? (
+              <motion.div
+                key="downloading"
+                className={styles.downloadingState}
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                transition={{ duration: 0.3 }}
+              >
                 <motion.div
-                  key={index}
-                  className={styles.storyCard}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2, duration: 0.6 }}
+                  className={styles.downloadSpinner}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
                 >
-                  <div className={styles.storyImage}>
-                    <motion.img 
-                      src={story.image} 
-                      alt={story.title}
-                      whileHover={{ scale: 1.05, rotate: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </div>
-                  <div className={styles.storyContent}>
-                    <motion.h3 
-                      initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3, duration: 0.6 }}
-                    >
-                      {story.title}
-                    </motion.h3>
-                    <motion.h4 
-                      initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.4, duration: 0.6 }}
-                    >
-                      {story.subtitle}
-                    </motion.h4>
-                    <motion.p 
-                      initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5, duration: 0.6 }}
-                    >
-                      {story.description}
-                    </motion.p>
-                  </div>
+                  {/* <Loader2 style={{color:"white"}} className={styles.spinner} size={15} /> */}
                 </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
+                <span>Downloading...</span>
+                <motion.div
+                  className={styles.downloadProgress}
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 2, ease: "easeInOut" }}
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="download"
+                className={styles.downloadReadyState}
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                transition={{ duration: 0.3 }}
+              >
+              
+                <span>Download Portfolio</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+        
+        <motion.div
+          className={styles.downloadRipple}
+          animate={{
+            scale: [1, 2, 1],
+            opacity: [0.3, 0, 0.3]
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </motion.button>
+    </motion.div>
+  </motion.div>
+</section>
 
         {/* Services Section */}
         <section id="services" className={styles.services}>
@@ -885,113 +1004,193 @@ const Page = () => {
         </section>
 
         {/* About Section */}
-        <section id="about" className={styles.about}>
+
+{/* About Section */}
+<section id="about" className={styles.about}>
+  <motion.div
+    className={styles.aboutContent}
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+  >
+    <motion.h2
+      className={styles.sectionHeading}
+      initial={{ x: -100, opacity: 0 }}
+      whileInView={{ x: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
+      About Us
+    </motion.h2>
+
+    <div className={styles.aboutMain}>
+      {/* Photographer Photo Section */}
+      <motion.div
+        className={styles.photographerSection}
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3, duration: 0.8 }}
+      >
+        <div className={styles.photographerImageContainer}>
           <motion.div
-            className={styles.aboutContent}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            className={styles.photographerImageWrapper}
+            whileHover={{ scale: 1.02, rotate: 0.5 }}
+            transition={{ duration: 0.3 }}
           >
-            <motion.h2
-              className={styles.sectionHeading}
-              initial={{ x: -100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              About Us
-            </motion.h2>
-
-            <motion.div
-              className={styles.aboutLogo}
-              initial={{
-                scale: 0,
-                rotate: -5,
-                opacity: 0,
-                filter: "blur(50px)",
-              }}
-              whileInView={{
-                scale: 1,
-                rotate: 0,
-                opacity: 1,
-                filter: "blur(0px)",
-              }}
-              viewport={{ once: true }}
-              transition={{
-                delay: 0.5, 
-                duration: 0.8,
-                type: "spring",
-                stiffness: 100,
-              }}
-            >
-              <img 
-                src={isDarkMode ? "./Images/Logo.png" : "./Images/Logo2.png"} 
-                alt="Logo" 
-                className={styles.logo} 
-              />
-              <p className={styles.ownername2}>Vaibhav Photography</p>
-            </motion.div>
-
-            <motion.div
-              className={styles.aboutText}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-            >
-              <p>
-                With a passion for capturing life's most precious moments, I specialize in 
-                creating timeless memories through the art of photography. From intimate family 
-                portraits to grand wedding celebrations, every shot tells a unique story.
-              </p>
-            </motion.div>
+            <img 
+              src="./Images/VB.jpg" 
+              alt="Vaibhav - Professional Photographer" 
+              className={styles.photographerImage}
+            />
           </motion.div>
-        </section>
+        </div>
+      </motion.div>
 
-        {/* Contact Section */}
-        <section id="contact" className={styles.contact}>
+      {/* Content Section */}
+      <motion.div
+        className={styles.aboutContentSection}
+        initial={{ opacity: 0, x: 50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.5, duration: 0.8 }}
+      >
+        <motion.div
+          className={styles.aboutLogo}
+          initial={{
+            scale: 0,
+            rotate: -5,
+            opacity: 0,
+            filter: "blur(50px)",
+          }}
+          whileInView={{
+            scale: 1,
+            rotate: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+          }}
+          viewport={{ once: true }}
+          transition={{
+            delay: 0.7, 
+            duration: 0.8,
+            type: "spring",
+            stiffness: 100,
+          }}
+        >
+          <img 
+            src={isDarkMode ? "./Images/Logo.png" : "./Images/Logo2.png"} 
+            alt="Logo" 
+            className={styles.logo} 
+          />
+          <p className={styles.ownername2}>Vaibhav Photography</p>
+        </motion.div>
+
+        <motion.div
+          className={styles.aboutText}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.9, duration: 0.8 }}
+        >
+          <p>
+            With a passion for capturing life's most precious moments, I specialize in 
+            creating timeless memories through the art of photography. From intimate family 
+            portraits to grand wedding celebrations, every shot tells a unique story.
+          </p>
+          
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            className={styles.aboutStats}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ delay: 1.1, duration: 0.6 }}
           >
-            <motion.h2
-              className={styles.sectionHeading}
-              initial={{ x: -100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              Contact Me
-            </motion.h2>
-            <p>Below are the details to reach out to me!</p>
-            
-            <div className={styles.contactGrid}>
-              {[
-                { icon: MapPin, title: "ADDRESS", content: "Chikodi, Karnataka, India" },
-                { icon: Phone, title: "CONTACT NUMBER", content: "+91 94825276" },
-                { icon: Mail, title: "EMAIL ADDRESS", content: "prajwalapat5@gmail.com" },
-                { icon: BookCheck, title: "Google Form", content: "Help Us To Reach You Out" }
-              ].map((item, index) => (
-                <motion.div 
-                  key={index}
-                  className={styles.contactItem}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.6 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                >
-                  <div className={styles.iconWrapper}>
-                    <item.icon className={styles.icon} size={24} />
-                  </div>
-                  <h4>{item.title}</h4>
-                  <p>{item.content}</p>
-                </motion.div>
-              ))}
+            <div className={styles.stat}>
+              <span className={styles.statNumber}>50+</span>
+              <span className={styles.statLabel}>Happy Clients</span>
+            </div>
+            <div className={styles.stat}>
+              <span className={styles.statNumber}>3+</span>
+              <span className={styles.statLabel}>Years Experience</span>
+            </div>
+            <div className={styles.stat}>
+              <span className={styles.statNumber}>1000+</span>
+              <span className={styles.statLabel}>Photos Captured</span>
             </div>
           </motion.div>
-        </section>
+        </motion.div>
+      </motion.div>
+    </div>
+  </motion.div>
+</section>
+
+        {/* Contact Section */}
+       <section id="contact" className={styles.contact}>
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+  >
+    <motion.h2
+      className={styles.sectionHeading}
+      initial={{ x: -100, opacity: 0 }}
+      whileInView={{ x: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
+      Contact Me
+    </motion.h2>
+    <p>Below are the details to reach out to me!</p>
+    
+    <div className={styles.contactGrid}>
+      {[
+        { 
+          icon: MapPin, 
+          title: "ADDRESS", 
+          content: "Chikodi, Karnataka, India",
+          onClick: () => window.open('https://maps.google.com/?q=Chikodi,Karnataka,India', '_blank')
+        },
+        { 
+          icon: Phone, 
+          title: "CONTACT NUMBER", 
+          content: "+91 7338320035",
+          onClick: () => window.open('tel:+917338320035', '_self')
+        },
+        { 
+          icon: Mail, 
+          title: "EMAIL ADDRESS", 
+          content: "vaibhavphotography@gmail.com", // Fixed typo: gamil -> gmail
+          onClick: () => window.open('mailto:vaibhavphotography@gmail.com', '_self')
+        },
+        { 
+          icon: BookCheck, 
+          title: "Google Form", 
+          content: "Help Us To Reach You Out",
+          onClick: () => window.open('https://forms.google.com/your-form-link', '_blank') // Replace with actual form link
+        }
+      ].map((item, index) => (
+        <motion.div 
+          key={index}
+          className={`${styles.contactItem} ${styles.clickable}`} // Added clickable class
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.1, duration: 0.6 }}
+          whileHover={{ scale: 1.05, y: -5 }}
+          whileTap={{ scale: 0.95 }} // Added tap animation
+          onClick={item.onClick}
+          style={{ cursor: 'pointer' }} // Make it clear it's clickable
+        >
+          <div className={styles.iconWrapper}>
+            <item.icon className={styles.icon} size={24} />
+          </div>
+          <h4>{item.title}</h4>
+          <p>{item.content}</p>
+        </motion.div>
+      ))}
+    </div>
+  </motion.div>
+</section>
 
         {/* Thank You Section */}
         <section id="thankyou" className={styles.thankyouContainer}>
